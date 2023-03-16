@@ -43,8 +43,8 @@ def returned_message(message):
         return "personnellement j'adore faire feur"
     elif '?' in message.content and 'quoi' in message.content and message.channel.type != discord.ChannelType.private:
         return "moi je crois savoir, mais je suis pas sûr"
-    elif ('dis' in message.content or 'dit' in message.content) and 'quoi' in message.content:
-        return "ça dit feur, à mon humble avis"
+    # elif ('dis' in message.content or 'dit' in message.content) and 'quoi' in message.content:
+    #     return "ça dit feur, à mon humble avis"
     elif 'quoi' in message.content:
         return "feur"
 
