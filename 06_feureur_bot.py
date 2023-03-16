@@ -67,7 +67,7 @@ async def on_message(message):
     # pour eviter que le bot ne se reponde a lui-meme
     if message.author == client.user:
         return
-    
+
     # gerer la discussion privee avec le bot
     elif 'quoi' in message.content and message.channel.type == discord.ChannelType.private and message.author != client.user:
         message_to_send = returned_message(message)
@@ -82,6 +82,6 @@ async def on_message(message):
                         last_message = await channel.fetch_message(channel.last_message_id)
                         if 'quoi' in last_message.content and last_message.author != client.user:
                             message_to_send = returned_message(last_message)
-                            await message.channel.send(message_to_send)
+                            await channel.send(message_to_send)
 
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
