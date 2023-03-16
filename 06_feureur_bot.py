@@ -71,7 +71,7 @@ async def on_message(message):
     
     # gerer la discussion privee avec le bot
     elif 'quoi' in message.content and message.channel.type == discord.ChannelType.private and message.author != client.user:
-        message_to_send = returned_message(message)
+        message_to_send = "je suis défecteux aled" # returned_message(message)
         await message.channel.send(message_to_send)
 
     # gerer la discussion dans un serveur
@@ -82,7 +82,7 @@ async def on_message(message):
                     if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
                         last_message = await channel.fetch_message(channel.last_message_id)
                         if 'quoi' in last_message.content and last_message.author != client.user:
-                            message_to_send = returned_message(last_message)
+                            message_to_send = "je suis défectueux aled" # returned_message(last_message)
                             await channel.send(message_to_send)
 
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
