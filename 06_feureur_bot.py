@@ -1,8 +1,6 @@
 import discord
 from spellchecker import SpellChecker
 
-spell = SpellChecker(language='fr') # XXX update
-
 # Definit une variable intents qui contient les "intents" par defaut de la bibliotheque discord.
 # Les intents sont des informations sur les donnees que vous voulez recevoir depuis le serveur Discord.
 intents = discord.Intents.default() 
@@ -48,11 +46,6 @@ def returned_message(message):
     elif 'quoi' in message.content:
         return "feur"
 
-def correct_message(message): # XXX update
-    words = message.split()
-    corrected_words = spell.known(words) + spell.unknown(words)
-    return ' '.join(corrected_words)
-
 ###################################################
 ### fonctions d'evenement lie au client Discord ###
 ###################################################
@@ -71,7 +64,6 @@ async def on_ready():
 async def on_message(message):
     # conversion du message en minuscules
     message.content = message.content.lower()
-    corrected_message = correct_message(message.content) # XXX update
 
     # pour eviter que le bot ne se reponde a lui-meme
     if message.author == client.user:
