@@ -83,7 +83,7 @@ async def on_message(message):
                 if channel.permissions_for(guild.me).read_messages: # on regarde ceux ou le bot peut lire les messages
                     if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
                         last_message = await channel.fetch_message(channel.last_message_id)
-                        if 'quoi' in last_message.content.lower and last_message.author != client.user:
+                        if 'quoi' in last_message.content and last_message.author != client.user:
                             message_to_send = returned_message(last_message)
                             await channel.send(message_to_send)
 
