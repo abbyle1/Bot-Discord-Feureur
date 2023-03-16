@@ -1,5 +1,4 @@
 import discord
-from spellchecker import SpellChecker
 
 # Definit une variable intents qui contient les "intents" par defaut de la bibliotheque discord.
 # Les intents sont des informations sur les donnees que vous voulez recevoir depuis le serveur Discord.
@@ -34,18 +33,19 @@ def returned_message(message):
         - tu fais quoi 
         - quoi de neuf
     '''
+    contenu_message = message.content.lower()
     for word in authorised_words:
-        if (word in message.content):
+        if (word in contenu_message):
             return "...👀"
-    if 'c\'est' in message.content and 'quoi' in message.content:
+    if 'c\'est' in contenu_message and 'quoi' in contenu_message:
         return 'c\'est feur je pense non ?\nt\'en penses quoi ? (anti-feur lol)'
-    elif 'fais' in message.content and 'quoi' in message.content:
+    elif 'fais' in contenu_message and 'quoi' in contenu_message:
         return "personnellement j'adore faire feur"
-    elif '?' in message.content and 'quoi' in message.content and message.channel.type != discord.ChannelType.private:
+    elif '?' in contenu_message and 'quoi' in contenu_message and message.channel.type != discord.ChannelType.private:
         return "moi je crois savoir, mais je suis pas sûr"
     # elif ('dis' in message.content or 'dit' in message.content) and 'quoi' in message.content:
     #     return "ça dit feur, à mon humble avis"
-    elif 'quoi' in message.content:
+    elif 'quoi' in contenu_message:
         return "feur"
 
 ###################################################
@@ -65,14 +65,14 @@ async def on_ready():
 @client.event
 async def on_message(message):
     # conversion du message en minuscules
-    message.content = message.content.lower()
+    contenu_message = message.content.lower()
 
     # pour eviter que le bot ne se reponde a lui-meme
     if message.author == client.user:
         return
 
     # gerer la discussion privee avec le bot
-    elif 'quoi' in message.content and message.channel.type == discord.ChannelType.private and message.author != client.user:
+    elif 'quoi' in contenu_message and message.channel.type == discord.ChannelType.private and message.author != client.user:
         message_to_send = returned_message(message)
         await message.channel.send(message_to_send)
 
@@ -83,8 +83,8 @@ async def on_message(message):
                 if channel.permissions_for(guild.me).read_messages: # on regarde ceux ou le bot peut lire les messages
                     if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
                         last_message = await channel.fetch_message(channel.last_message_id)
-                        if 'quoi' in last_message.content.lower() and last_message.author != client.user:
-                            message_to_send = returned_message(last_message.lower())
+                        if 'quoi' in contenu_message and last_message.author != client.user:
+                            message_to_send = returned_message(last_message)
                             await channel.send(message_to_send)
 
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
