@@ -63,7 +63,8 @@ async def on_ready():
 @client.event
 async def on_message(message):
     # conversion du message en minuscules
-    message.content = message.content.lower()
+    mess_to_lower_case = message.content.lower()
+    message.content = mess_to_lower_case
 
     # pour eviter que le bot ne se reponde a lui-meme
     if message.author == client.user:
