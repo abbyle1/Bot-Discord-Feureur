@@ -93,4 +93,4 @@ async def on_message(message):
                             message_to_send = returned_message(last_message)
                             await channel.send(message_to_send)
 
-client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GJF8yt.Chte1JCRYPZmrmAEb97k776YCsZi15wm6whRGE")
+client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
