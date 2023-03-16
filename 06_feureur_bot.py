@@ -43,6 +43,8 @@ def returned_message(message):
         return "personnellement j'adore faire feur"
     elif '?' in message.content and 'quoi' in message.content and message.channel.type != discord.ChannelType.private:
         return "moi je crois savoir, mais je suis pas sûr"
+    elif ('dis' in message.content or 'dit' in message.content) and 'quoi' in message.content:
+        return "ça dit feur, à mon humble avis"
     elif 'quoi' in message.content:
         return "feur"
 
@@ -63,8 +65,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     # conversion du message en minuscules
-    mess_to_lower_case = message.content.lower()
-    message.content = mess_to_lower_case
+    message.content = message.content.lower()
 
     # pour eviter que le bot ne se reponde a lui-meme
     if message.author == client.user:
@@ -82,8 +83,8 @@ async def on_message(message):
                 if channel.permissions_for(guild.me).read_messages: # on regarde ceux ou le bot peut lire les messages
                     if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
                         last_message = await channel.fetch_message(channel.last_message_id)
-                        if 'quoi' in last_message.content and last_message.author != client.user:
-                            message_to_send = returned_message(last_message)
+                        if 'quoi' in last_message.content.lower and last_message.author != client.user:
+                            message_to_send = returned_message(last_message.lower)
                             await channel.send(message_to_send)
 
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
