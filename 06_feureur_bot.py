@@ -1,4 +1,7 @@
 import discord
+from spellchecker import SpellChecker
+
+spell = SpellChecker(language='fr') # XXX update
 
 # Definit une variable intents qui contient les "intents" par defaut de la bibliotheque discord.
 # Les intents sont des informations sur les donnees que vous voulez recevoir depuis le serveur Discord.
@@ -36,14 +39,19 @@ def returned_message(message):
     for word in authorised_words:
         if (word in message.content):
             return "...👀"
-    if 'c\'est' in message.content and 'quoi' in message.content:
+    if ('c\'est' in message.content and 'quoi' in message.content):
         return 'c\'est feur je pense non ?\nt\'en penses quoi ? (anti-feur lol)'
-    elif 'fais' in message.content and 'quoi' in message.content:
+    elif (('fais' in message.content or 'fait' in message.content) and 'quoi' in message.content):
         return "personnellement j'adore faire feur"
-    elif '?' in message.content and 'quoi' in message.content and message.channel.type != discord.ChannelType.private:
+    elif ('?' in message.content and 'quoi' in message.content and message.channel.type != discord.ChannelType.private):
         return "moi je crois savoir, mais je suis pas sûr"
-    elif 'quoi' in message.content:
+    elif ('quoi' in message.content):
         return "feur"
+
+def correct_message(message): # XXX update
+    words = message.split()
+    corrected_words = spell.known(words) + spell.unknown(words)
+    return ' '.join(corrected_words)
 
 ###################################################
 ### fonctions d'evenement lie au client Discord ###
@@ -79,9 +87,13 @@ async def on_message(message):
             for channel in guild.text_channels: # parcourt les salons du serveur
                 if channel.permissions_for(guild.me).read_messages: # on regarde ceux ou le bot peut lire les messages
                     if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
-                        last_message = await channel.fetch_message(channel.last_message_id)
-                        if 'quoi' in last_message.content and last_message.author != client.user:
-                            message_to_send = returned_message(last_message)
-                            await channel.send(message_to_send)
+                        try: # les salons suivants ne fonctionnent pas : "🤖commande-bot" ; "projet-dsb" ; "⌨bash" ; "among-us"
+                            last_message = await channel.fetch_message(channel.last_message_id)
+                            last_message.content = last_message.content.lower()
+                            if 'quoi' in last_message.content and last_message.author != client.user:
+                                message_to_send = returned_message(last_message)
+                                await channel.send(message_to_send)
+                        except:
+                            print(f"error detected in {channel.name} but program still running")
 
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
