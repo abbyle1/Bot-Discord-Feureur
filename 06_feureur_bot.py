@@ -87,7 +87,7 @@ async def on_message(message):
             for channel in guild.text_channels: # parcourt les salons du serveur
                 if channel.permissions_for(guild.me).read_messages: # on regarde ceux ou le bot peut lire les messages
                     if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
-                        try: # les salons suivants ne fonctionnent pas : "🤖commande-bot" ; "projet-dsb" ; "⌨bash" ; "among-us"
+                        try: # certains salons auront un message qui fera planter le code
                             last_message = await channel.fetch_message(channel.last_message_id)
                             last_message.content = last_message.content.lower()
                             if 'quoi' in last_message.content and last_message.author != client.user:
