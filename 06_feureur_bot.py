@@ -11,7 +11,7 @@ intents = discord.Intents.default()
 intents.guilds = True
 
 # Cette ligne active l'intent pour les "guild_messages" (messages de salon), 
-# ce qui signifie que votre bot sera informe de tous les messages dans les salons auxquels il a acces.
+# ce qui signifie que le bot sera informe de tous les messages dans les salons auxquels il a acces.
 intents.guild_messages = True
 
 # Cette ligne cree un objet "client" pour se connecter a Discord en utilisant les intents définis dans la variable intents.
@@ -39,7 +39,9 @@ def returned_message(message):
     for word in authorised_words:
         if (word in message.content):
             return "...👀"
-    if ('c\'est' in message.content and 'quoi' in message.content):
+    if ('antifeur' or 'anti feur' or 'anti-feur') in message.content:
+        return "👌"
+    elif ('c\'est' in message.content and 'quoi' in message.content):
         return 'c\'est feur je pense non ?\nt\'en penses quoi ? (anti-feur lol)'
     elif (('fais' in message.content or 'fait' in message.content) and 'quoi' in message.content):
         return "personnellement j'adore faire feur"
