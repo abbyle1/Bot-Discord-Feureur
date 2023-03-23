@@ -102,7 +102,7 @@ async def on_message(message):
 
 @client.event
 async def on_message_delete(message):
-    time.sleep(30)
+    time.sleep(60)
     channel = message.channel
     deleted_message = message.content
     author = message.author.mention
