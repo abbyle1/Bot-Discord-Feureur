@@ -51,7 +51,10 @@ def returned_message(message):
     elif ('?' in message.content and 'quoi' in message.content and message.channel.type != discord.ChannelType.private):
         return "moi je crois savoir, mais je suis pas sûr"
     elif ('quoi' in message.content):
-        return "feur"
+        n = random.randint(0,23)
+        if n > 3:
+            return "feur"
+        return feur_gif[n]
 
 ###################################################
 ### fonctions d'evenement lie au client Discord ###
