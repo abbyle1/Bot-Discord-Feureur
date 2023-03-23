@@ -105,7 +105,7 @@ async def on_message_delete(message):
     deleted_message = message.content
     author = message.author.mention
     if deleted_message != "":
-        await channel.send(f"Le message de {author}  a été supprimé : {deleted_message}.")
+        await channel.send(f"Le message de {author}  a été supprimé : {deleted_message}")
     else:
         await channel.send(f"Le message de {author}  a été supprimé.")
 
