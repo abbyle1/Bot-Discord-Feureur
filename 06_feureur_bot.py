@@ -1,12 +1,9 @@
 import discord
-from spellchecker import SpellChecker
-import time
-
-spell = SpellChecker(language='fr') # XXX update
+import random
 
 # Definit une variable intents qui contient les "intents" par defaut de la bibliotheque discord.
 # Les intents sont des informations sur les donnees que vous voulez recevoir depuis le serveur Discord.
-intents = discord.Intents.default() 
+intents = discord.Intents.default()
 
 # Cette ligne active l'intent pour les "guilds" (serveurs), ce qui signifie que votre bot sera informe de tous les changements de guilde.
 intents.guilds = True
@@ -20,6 +17,8 @@ client = discord.Client(intents=intents)
 
 # Liste de String contenant une liste de mots autorises
 authorised_words = ['quoiqu','piquoit','pouquoi','séquoia','taquoir','carquois','claquoir','dacquois','iroquois','manquoit','marquoir','narquois','pourquoi','quoi que','séquoias','taquoirs','claquoirs','iroquoise','marquoirs','narquoise','turquoise','iroquoises','narquoises','turquoises','métaséquoia','tu-sais-quoi','narquoisement','je-ne-sais-quoi']
+
+feur_gif = ["https://tenor.com/view/feur-gif-23547897","https://tenor.com/view/feur-theobabac-quoi-gif-24294658","https://tenor.com/view/feur-meme-gif-24407942","https://tenor.com/view/multicort-feur-gif-23304150"]
 
 ###################################################
 ###                  fonctions                  ###
@@ -42,6 +41,9 @@ def returned_message(message):
             return "...👀"
     if ('antifeur' or 'anti feur' or 'anti-feur') in message.content:
         return "👌"
+    elif message.content == "quoi":
+        n = random.randint(0,3)
+        return feur_gif[n]
     elif ('c\'est' in message.content and 'quoi' in message.content):
         return 'c\'est feur je pense non ?\nt\'en penses quoi ? (anti-feur lol)'
     elif (('fais' in message.content or 'fait' in message.content) and 'quoi' in message.content):
@@ -50,11 +52,6 @@ def returned_message(message):
         return "moi je crois savoir, mais je suis pas sûr"
     elif ('quoi' in message.content):
         return "feur"
-
-def correct_message(message): # XXX update
-    words = message.split()
-    corrected_words = spell.known(words) + spell.unknown(words)
-    return ' '.join(corrected_words)
 
 ###################################################
 ### fonctions d'evenement lie au client Discord ###
@@ -102,7 +99,6 @@ async def on_message(message):
 
 @client.event
 async def on_message_delete(message):
-    time.sleep(60)
     channel = message.channel
     deleted_message = message.content
     author = message.author.mention
