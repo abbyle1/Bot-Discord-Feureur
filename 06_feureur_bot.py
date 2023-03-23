@@ -1,5 +1,6 @@
 import discord
 from spellchecker import SpellChecker
+import time
 
 spell = SpellChecker(language='fr') # XXX update
 
@@ -101,8 +102,9 @@ async def on_message(message):
 
 @client.event
 async def on_message_delete(message):
+    time.sleep(30)
     channel = message.channel
-    deleted_message = str(message.content)
+    deleted_message = message.content
     author = message.author.mention
     if deleted_message != "":
         await channel.send(f"Le message de {author} a été supprimé : {deleted_message}")
