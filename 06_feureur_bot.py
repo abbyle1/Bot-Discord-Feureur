@@ -102,11 +102,11 @@ async def on_message(message):
 @client.event
 async def on_message_delete(message):
     channel = message.channel
-    deleted_message = message.content
+    deleted_message = str(message.content)
     author = message.author.mention
     if deleted_message != "":
-        await channel.send(f"Le message de {author}  a été supprimé : {deleted_message}")
+        await channel.send(f"Le message de {author} a été supprimé : {deleted_message}")
     else:
-        await channel.send(f"Le message de {author}  a été supprimé.")
+        await channel.send(f"Le message de {author} a été supprimé.")
 
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
