@@ -99,15 +99,4 @@ async def on_message(message):
                         except:
                             print(f"error detected in {channel.name} but program still running")
 
-
-@client.event
-async def on_message_delete(message):
-    channel = message.channel
-    deleted_message = message.content
-    author = message.author.mention
-    if deleted_message != "":
-        await channel.send(f"Le message de {author} a été supprimé : {deleted_message}")
-    else:
-        await channel.send(f"Le message de {author} a été supprimé.")
-
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
