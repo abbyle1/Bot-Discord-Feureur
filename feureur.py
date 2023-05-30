@@ -1,23 +1,28 @@
 import discord
 import random
 
+###################################################
+###                  prérequis                  ###
+###################################################
+
 # Definit une variable intents qui contient les "intents" par defaut de la bibliotheque discord.
 # Les intents sont des informations sur les donnees que vous voulez recevoir depuis le serveur Discord.
 intents = discord.Intents.default()
-
-# Cette ligne active l'intent pour les "guilds" (serveurs), ce qui signifie que votre bot sera informe de tous les changements de guilde.
+# Cette ligne active l'intent pour les "guilds" (serveurs), ce qui signifie que votre bot sera informe de tous les changements au sein du serveur.
 intents.guilds = True
-
 # Cette ligne active l'intent pour les "guild_messages" (messages de salon), 
 # ce qui signifie que le bot sera informe de tous les messages dans les salons auxquels il a acces.
 intents.guild_messages = True
-
 # Cette ligne cree un objet "client" pour se connecter a Discord en utilisant les intents définis dans la variable intents.
 client = discord.Client(intents=intents)
 
+###################################################
+###                   listes                    ###
+###################################################
+
 # Liste de String contenant une liste de mots autorises
 authorised_words = ['quoiqu','quoique','quoi que ce','quoi que se','piquoit','pouquoi','séquoia','taquoir','carquois','claquoir','dacquois','iroquois','manquoit','marquoir','narquois','pourquoi','quoi que','séquoias','taquoirs','claquoirs','iroquoise','marquoirs','narquoise','turquoise','iroquoises','narquoises','turquoises','métaséquoia','tu-sais-quoi','narquoisement','je-ne-sais-quoi']
-
+# Liste de gif repondant 'feur'
 tab_gif = ["https://tenor.com/view/feur-gif-23547897","https://tenor.com/view/feur-theobabac-quoi-gif-24294658","https://tenor.com/view/feur-meme-gif-24407942","https://tenor.com/view/multicort-feur-gif-23304150"]
 
 ###################################################
@@ -98,5 +103,9 @@ async def on_message(message):
                                 await channel.send(message_to_send)
                         except:
                             print(f"error detected in {channel.name} but program still running")
+
+###################################################
+###                  lancement                  ###
+###################################################
 
 client.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
