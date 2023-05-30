@@ -1,2 +1,2 @@
-worker: python 06_feureur_bot.py 
-web: gunicorn python 06_feureur_bot.py:feureur
+worker: python feureur.py 
+web: gunicorn python feureur.py:feureur
