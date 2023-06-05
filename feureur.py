@@ -75,7 +75,6 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    # conversion du message en minuscules
     contenu = message.content
 
     # pour eviter que le bot ne se reponde a lui-meme
