@@ -2,8 +2,6 @@ import discord
 import random
 from unidecode import unidecode
 
-# juste un test
-
 ###################################################
 ###                  prérequis                  ###
 ###################################################
