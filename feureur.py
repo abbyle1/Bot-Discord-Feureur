@@ -149,4 +149,5 @@ async def on_message(message):
 ###################################################
 
 load_dotenv()
-bot.run(os.environ['TOKEN'])
+# bot.run(os.environ['TOKEN'])
+bot.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GsSEw6.Sv37CPEucQL3DPPsSgOCipaS7K9_QTunJAo_2s")
