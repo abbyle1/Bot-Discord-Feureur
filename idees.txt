@@ -1,2 +1,4 @@
-réponses plus personnalisées
-quoicoubeh update
+Liste de MàJ :
+- réponses plus personnalisées
+- quoicoubeh update
+- enlever les caractères spéciaux du message
