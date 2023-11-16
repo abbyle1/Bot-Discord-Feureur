@@ -24,9 +24,46 @@ bot = discord.Client(intents=intents)
 ###################################################
 
 # Liste de String contenant une liste de mots autorises
-authorised_words = ['quoiqu','quoique','quoi que ce','quoi que se','piquoit','pouquoi','séquoia','taquoir','carquois','claquoir','dacquois','iroquois','manquoit','marquoir','narquois','pourquoi','quoi que','séquoias','taquoirs','claquoirs','iroquoise','marquoirs','narquoise','turquoise','iroquoises','narquoises','turquoises','métaséquoia','tu-sais-quoi','narquoisement','je-ne-sais-quoi']
+authorised_words = [
+    'quoiqu',
+    'quoique',
+    'quoi que ce',
+    'quoi que se',
+    'piquoit',
+    'pouquoi',
+    'séquoia',
+    'taquoir',
+    'carquois',
+    'claquoir',
+    'dacquois',
+    'iroquois',
+    'manquoit',
+    'marquoir',
+    'narquois',
+    'pourquoi',
+    'quoi que',
+    'séquoias',
+    'taquoirs',
+    'claquoirs',
+    'iroquoise',
+    'marquoirs',
+    'narquoise',
+    'turquoise',
+    'iroquoises',
+    'narquoises',
+    'turquoises',
+    'métaséquoia',
+    'tu-sais-quoi',
+    'narquoisement',
+    'je-ne-sais-quoi'
+]
 # Liste de gifs repondant 'feur'
-tab_gif = ["https://tenor.com/view/feur-gif-23547897", "https://tenor.com/view/feur-theobabac-quoi-gif-24294658", "https://tenor.com/view/feur-meme-gif-24407942", "https://tenor.com/view/multicort-feur-gif-23304150"]
+tab_gif = [
+    "https://tenor.com/view/feur-gif-23547897",
+    "https://tenor.com/view/feur-theobabac-quoi-gif-24294658",
+    "https://tenor.com/view/feur-meme-gif-24407942",
+    "https://tenor.com/view/multicort-feur-gif-23304150"
+]
 
 ###################################################
 ###                  fonctions                  ###
