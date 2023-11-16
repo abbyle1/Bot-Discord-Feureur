@@ -1,6 +1,8 @@
 import discord
 import random
 from unidecode import unidecode
+from dotenv import load_dotenv
+import os
 
 ###################################################
 ###                  prérequis                  ###
@@ -109,4 +111,5 @@ async def on_message(message):
 ###                  lancement                  ###
 ###################################################
 
-bot.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GtTYrZ.6WLOt582X4EKzGD5sudvlp-uGaLgGBNS0fh5SU")
+load_dotenv()
+bot.run(os.environ['TOKEN'])
