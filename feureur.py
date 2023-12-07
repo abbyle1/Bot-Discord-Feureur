@@ -78,13 +78,7 @@ def returned_message(str):
         str (String) : une chaine de caracteres qui sera publie dans le chat par le bot
     '''
     liste = str.split()
-    if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste):
-        n = random.randint(0,1)
-        if (n == 0):
-            return 'https://tenor.com/view/marex-tanking-gif-27301657'
-        else:
-            return ''
-    elif 'quoi' in liste and ('anti' in liste and 'feur' in liste):
+    if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
         n = random.randint(0,1)
         if (n == 0):
             return 'https://tenor.com/view/marex-tanking-gif-27301657'
