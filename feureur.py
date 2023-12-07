@@ -82,7 +82,12 @@ def returned_message(str):
     Retourne :
         str (String) : une chaine de caracteres qui sera publie dans le chat par le bot
     '''
+    # on retire les caracteres spéciaux (sauf ' ', '-' et ''')
+    str = ''.join(letter for letter in str if (letter.isalnum() or letter == ' ' or letter == '-' or letter == '\''))
+    # on transforme la string en liste
     liste = str.split()
+    for mot in liste:
+        mot = ''.join(letter for letter in mot if letter.isalnum())
     if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
         n = random.randint(0,3)
         if (n < 2):
