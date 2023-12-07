@@ -64,6 +64,11 @@ tab_gif = [
     "https://tenor.com/view/feur-meme-gif-24407942",
     "https://tenor.com/view/multicort-feur-gif-23304150"
 ]
+# Liste de 'exhausted gifs'
+exhausted_gif = [
+    "https://tenor.com/view/marex-tanking-gif-27301657",
+    "https://tenor.com/view/sad-cat-sunakook-tired-exhausted-gif-24687868"
+]
 
 ###################################################
 ###                  fonctions                  ###
@@ -79,9 +84,9 @@ def returned_message(str):
     '''
     liste = str.split()
     if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
-        n = random.randint(0,1)
-        if (n == 0):
-            return 'https://tenor.com/view/marex-tanking-gif-27301657'
+        n = random.randint(0,3)
+        if (n < 2):
+            return exhausted_gif[n]
         else:
             return ''
     elif 'quoi' not in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
