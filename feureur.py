@@ -79,9 +79,17 @@ def returned_message(str):
     '''
     liste = str.split()
     if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste):
-        return ''
+        n = random.randint(0,1)
+        if (n == 0):
+            return 'https://tenor.com/view/marex-tanking-gif-27301657'
+        else:
+            return ''
     elif 'quoi' in liste and ('anti' in liste and 'feur' in liste):
-        return ''
+        n = random.randint(0,1)
+        if (n == 0):
+            return 'https://tenor.com/view/marex-tanking-gif-27301657'
+        else:
+            return ''
     elif 'quoi' not in liste and ('antifeur' in liste or 'anti-feur' in liste):
         return "Pourquoi se protéger si l'on n'utilise même pas le q-word ? 🙄"
     elif 'quoi' not in liste and ('anti' in liste and 'feur' in liste):
