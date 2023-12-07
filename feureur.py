@@ -84,9 +84,7 @@ def returned_message(str):
             return 'https://tenor.com/view/marex-tanking-gif-27301657'
         else:
             return ''
-    elif 'quoi' not in liste and ('antifeur' in liste or 'anti-feur' in liste):
-        return "Pourquoi se protéger si l'on n'utilise même pas le q-word ? 🙄"
-    elif 'quoi' not in liste and ('anti' in liste and 'feur' in liste):
+    elif 'quoi' not in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
         return "Pourquoi se protéger si l'on n'utilise même pas le q-word ? 🙄"
     elif 'quoi' in liste:
         n = random.randint(0,11)
