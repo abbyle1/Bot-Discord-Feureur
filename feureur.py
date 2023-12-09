@@ -68,7 +68,8 @@ tab_gif = [
 exhausted_gif = [
     "https://tenor.com/view/marex-tanking-gif-27301657",
     "https://tenor.com/view/sad-cat-sunakook-tired-exhausted-gif-24687868",
-    "https://tenor.com/view/rick-and-morty-rick-sad-sitting-lonely-gif-25485281"
+    "https://tenor.com/view/rick-and-morty-rick-sad-sitting-lonely-gif-25485281",
+    "https://tenor.com/view/breaking-bad-gustavo-gif-26322938"
 ]
 
 ###################################################
@@ -90,8 +91,8 @@ def returned_message(str):
     for mot in liste:
         mot = ''.join(letter for letter in mot if letter.isalnum())
     if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
-        n = random.randint(0,5)
-        if (n < 3):
+        n = random.randint(0,7)
+        if (n < 4):
             return exhausted_gif[n]
         else:
             return ''
