@@ -102,7 +102,7 @@ def returned_message(str):
     elif 'quoi' not in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
         return "Pourquoi se protéger si l'on n'utilise même pas le q-word ? 🙄"
     elif 'quoi' in liste:
-        n = random.randint(0,11)
+        n = random.randint(0,7)
         if n in range(4):
             return tab_gif[n]
         else:
