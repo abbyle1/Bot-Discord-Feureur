@@ -2,6 +2,7 @@ import discord
 import random
 from unidecode import unidecode
 from dotenv import load_dotenv
+from discord.ext import commands
 import os
 
 ###################################################
@@ -71,6 +72,8 @@ exhausted_gif = [
     "https://tenor.com/view/rick-and-morty-rick-sad-sitting-lonely-gif-25485281",
     "https://tenor.com/view/breaking-bad-gustavo-gif-26322938"
 ]
+# List des 'feured'
+feured_list = []
 
 ###################################################
 ###                  fonctions                  ###
@@ -139,6 +142,7 @@ async def on_message(message):
         message_to_send = returned_message(contenu)
         if message_to_send != "":
             await message.channel.send(message_to_send)
+            feured_list.append(last_message.author)
 
     # gerer la discussion dans un serveur
     else:
@@ -153,8 +157,19 @@ async def on_message(message):
                                 message_to_send = returned_message(last_message.content)
                                 if message_to_send != "":
                                     await channel.send(message_to_send)
+                                    feured_list.append(last_message.author)
                         except:
                             print(f"error detected in {channel.name} but program still running")
+
+
+##################################################
+### fonctions de commande lies au bot Discord  ###
+##################################################
+
+bot = commands.Bot(command_prefix='/', intents=intents)
+@bot.command(name="feured")
+async def print_list(ctx): # ctx = context, pour recup les infos pratiques telles que : nom de user, channel, etc.
+    await ctx.send("les feured sont :\n" + '\n'.join(feured_list))
 
 ###################################################
 ###                  lancement                  ###
