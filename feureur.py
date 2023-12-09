@@ -91,7 +91,7 @@ def returned_message(str):
     for mot in liste:
         mot = ''.join(letter for letter in mot if letter.isalnum())
     if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
-        n = random.randint(0,11)
+        n = random.randint(0,7)
         if (n < 4):
             return exhausted_gif[n]
         else:
