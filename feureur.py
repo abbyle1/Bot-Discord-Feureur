@@ -1,9 +1,6 @@
 import discord
 import random
 from unidecode import unidecode
-from dotenv import load_dotenv
-# from discord.ext import commands
-# import os
 
 ###################################################
 ###                  prérequis                  ###
@@ -12,7 +9,7 @@ from dotenv import load_dotenv
 # Definit une variable intents qui contient les "intents" par defaut de la bibliotheque discord.
 # Les intents sont des informations sur les donnees que vous voulez recevoir depuis le serveur Discord.
 intents = discord.Intents.default()
-# Cette ligne active l'intent pour les "guilds" (serveurs), ce qui signifie que le bot sera informe de tous les changements au sein du serveur.
+# Cette ligne active l'intent pour les "guilds" (serveurs discord), ce qui signifie que le bot sera informé de tous les changements au sein du serveur.
 intents.guilds = True
 # Cette ligne active l'intent pour les "guild_messages" (messages de salon), 
 # ce qui signifie que le bot sera informe de tous les messages dans les salons auxquels il a acces.
@@ -24,7 +21,7 @@ bot = discord.Client(intents=intents)
 ###                   listes                    ###
 ###################################################
 
-# Liste de String contenant une liste de mots autorises
+# Liste des mots autorises
 authorised_words = [
     'quoiqu',
     'quoique',
@@ -72,8 +69,6 @@ exhausted_gif = [
     "https://tenor.com/view/rick-and-morty-rick-sad-sitting-lonely-gif-25485281",
     "https://tenor.com/view/breaking-bad-gustavo-gif-26322938"
 ]
-# List des 'feured'
-# feured_list = []
 
 ###################################################
 ###                  fonctions                  ###
@@ -81,32 +76,36 @@ exhausted_gif = [
 
 def returned_message(str):
     '''
-    Cette fonction renvoie une chaine de caracteres que le bot enverra dans le chat, personnalise en fonction du message passe en parametre
+    Cette fonction renvoie une chaine de caracteres que le bot enverra dans le chat, personnalise en fonction du message passé en parametre
     Arguments :
         message (Any) : le message auquel on souhaite repondre
     Retourne :
-        str (String) : une chaine de caracteres qui sera publie dans le chat par le bot
+        str (String) : une chaine de caracteres qui sera publié dans le chat par le bot
     '''
     # on retire les caracteres spéciaux (sauf ' ', '-' et ''')
     str = ''.join(letter for letter in str if (letter.isalnum() or letter == ' ' or letter == '-' or letter == '\''))
-    # on transforme la string en liste
+    # on transforme la string en liste de mot
     liste = str.split()
     for mot in liste:
         mot = ''.join(letter for letter in mot if letter.isalnum())
+    # si "quoi" et "antifeur" sont détectés, 1 chance sur 2 de publier un gif triste
     if 'quoi' in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
         n = random.randint(0,7)
         if (n < 4):
             return exhausted_gif[n]
         else:
             return ''
+    # si "antifeur" est détecté uniquement, on fait remarquer que c'est inutile
     elif 'quoi' not in liste and ('antifeur' in liste or 'anti-feur' in liste or ('anti' in liste and 'feur' in liste)):
         return "Pourquoi se protéger si l'on n'utilise même pas le q-word ? 🙄"
+    # si "quoi" est détecté uniquement, on répond : un gif 1 fois sur 2 ou "feur"
     elif 'quoi' in liste:
         n = random.randint(0,7)
         if n in range(4):
             return tab_gif[n]
         else:
             return 'feur'
+    # si un mot contenant la séquence "quoi" est détecté, le bot le fait remarquer
     for word in authorised_words:
         if (word in liste):
             return "...👀"
@@ -120,61 +119,47 @@ def returned_message(str):
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}')
-    print("liste des salons disponibles :\n[serveur] : [salon]")
-    for guild in bot.guilds: # parcourt les serveurs ou le bot est integre
+    print("liste des salons disponibles :\n[serveur] :\t[salon]")
+    # on print la liste des salons où le bot peut envoyer et lire des messages :
+    for guild in bot.guilds: # parcourt les serveurs ou le bot est intégré
         for channel in guild.text_channels: # parcourt les salons du serveur
-            if channel.permissions_for(guild.me).read_messages: # on regarde ceux ou le bot peut lire les messages
-                if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
-                    print(f"{guild.name} : {channel.name}")
+            if channel.permissions_for(guild.me).read_messages:
+                if channel.permissions_for(guild.me).send_messages:
+                    print(f"{guild.name} :\t{channel.name}")
 
 @bot.event
 async def on_message(message):
     contenu = message.content
+    contenu = contenu.lower()
+    contenu = unidecode(contenu) # on enleve les accents
+    channel = message.channel
 
     # pour eviter que le bot ne se reponde a lui-meme
     if message.author == bot.user:
+        print("bot is author") # XXX suppr
         return
 
     # gerer la discussion privee avec le bot
-    elif message.channel.type == discord.ChannelType.private and message.author != bot.user:
-        contenu = contenu.lower() # on enleve les maj
-        contenu = unidecode(contenu) # on enleve les accents
+    elif channel.type == discord.ChannelType.private:
         message_to_send = returned_message(contenu)
         if message_to_send != "":
-            await message.channel.send(message_to_send)
-            # feured_list.append(last_message.author)
-
+            await channel.send(message_to_send)
+            return # XXX suppr ?
+    
     # gerer la discussion dans un serveur
     else:
-        for guild in bot.guilds: # parcourt les serveurs ou le bot est integre
-            for channel in guild.text_channels: # parcourt les salons du serveur
-                if channel.permissions_for(guild.me).read_messages: # on regarde ceux ou le bot peut lire les messages
-                    if channel.permissions_for(guild.me).send_messages: # on regarde ceux ou le bot peut envoyer des messages
-                        try: # certains salons auront un message qui fera planter le code
-                            last_message = await channel.fetch_message(channel.last_message_id) # on doit recup le dernier message du salon
-                            last_message.content = unidecode(last_message.content.lower()) # enleve maj et accents
-                            if last_message.author != bot.user:
-                                message_to_send = returned_message(last_message.content)
-                                if message_to_send != "":
-                                    await channel.send(message_to_send)
-                                    # feured_list.append(last_message.author)
-                        except:
-                            print(f"error detected in {channel.name} but program still running")
-
-
-##################################################
-### fonctions de commande lies au bot Discord  ###
-##################################################
-
-# bot = commands.Bot(command_prefix='/', intents=intents)
-# @bot.command(name="feured")
-# async def print_list(ctx): # ctx = context, pour recup les infos pratiques telles que : nom de user, channel, etc.
-#     await ctx.send("les feured sont :\n" + '\n'.join(feured_list))
+        try: # TODO ajouter timeout ?
+            message = await channel.fetch_message(channel.last_message_id) # on recup le dernier message du salon
+            content = unidecode(message.content.lower())
+            if message.author != bot.user: # XXX répétition de code
+                message_to_send = returned_message(content)
+                if message_to_send != "":
+                    await channel.send(message_to_send)
+        except:
+            print(f"erreur détectée dans {channel.name}")
 
 ###################################################
 ###                  lancement                  ###
 ###################################################
 
-load_dotenv()
-# bot.run(os.environ['TOKEN'])
 bot.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GsSEw6.Sv37CPEucQL3DPPsSgOCipaS7K9_QTunJAo_2s")
