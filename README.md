@@ -7,6 +7,8 @@ Il existe une liste de mots authorisés contenant la séquence de caractères "q
 
 Vous avez également la possibilité de vous protéger en contrant le bot avec "antifeur", il vous en témoignera parfois son désarrois.
 
+N'oubliez pas de renseigner votre clé d'API (voir la section "lancement" du code src)
+
 ## Fichiers
 Ce projet contient plusieurs fichiers et utilise la plateforme Heroku qui permet aux développeurs de créer, déployer et gérer des applications dans le cloud. Si vous n'utilisez pas Heroku, vous pouvez ignorer les fichiers `requirements.txt` et `Procfile`.
 - `.gitignore`

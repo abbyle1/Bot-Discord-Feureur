@@ -162,4 +162,4 @@ async def on_message(message):
 ###                  lancement                  ###
 ###################################################
 
-bot.run("MTA1MzIyOTI5ODIxMjk0MTg1NA.GsSEw6.Sv37CPEucQL3DPPsSgOCipaS7K9_QTunJAo_2s")
+bot.run("YOUR_API_KEY")
