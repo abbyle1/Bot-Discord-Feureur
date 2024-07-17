@@ -3,7 +3,7 @@ Vous trouverez dans le fichier `feureur.py` le code src du bot pour Discord.
 
 Sa fonction est de surveiller les salons et de réagir lorsqu'il détecte la présence du q-word dans un message.
 
-Il existe une liste de mots authorisés contenant la séquence de lettre "q-u-o-i" tels que carquois, sequoia, etc. ; si vous les utilisez, le bot vous signalera qu'il vous tient à l'œil...
+Il existe une liste de mots authorisés contenant la séquence de caractères "q-u-o-i" tels que carquois, sequoia, etc. ; si vous les utilisez, le bot vous signalera qu'il vous tient à l'œil...
 
 Vous avez également la possibilité de vous protéger en contrant le bot avec "antifeur", il vous en témoignera parfois son désarrois.
 
